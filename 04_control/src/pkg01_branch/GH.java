@@ -5,7 +5,7 @@ public class GH {
   public static void method1() {
     
     
-    int age = 61;
+    int age = 5;
     
     if(age <= 20) {
       System.out.println("삑 -청소년 입니다.");
