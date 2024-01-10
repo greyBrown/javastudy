@@ -1,7 +1,5 @@
 package pkg01_variable;
 
-import java.lang.invoke.MethodHandles.Lookup.ClassOption;
-
 public class MainClass {
 
   public static void main(String[] args) {

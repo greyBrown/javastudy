@@ -1,4 +1,4 @@
-package pkg60_field;
+package pkg06_field;
 
 public class Adder {
 

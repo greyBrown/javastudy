@@ -8,7 +8,7 @@ public class MainClass {
     Calculator calculator = new Calculator();
     
     //메소드 호출
-    calculator.method1();  //이쪽(주는쪽)에서는 파라미터(받는쪽)를 인수, 인자(argument)라고 합니다. 근데 뭐 그렇게 구분은 잘...
+    calculator.method1();  //이쪽(주는쪽)에서는 파라미터(받는쪽에서 부르는 말)를 인수, 인자(argument)라고 합니다. 근데 뭐 그렇게 구분은 잘...
     
     int a = 10;
     calculator.method2(a);
