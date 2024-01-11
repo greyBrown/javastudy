@@ -15,7 +15,6 @@ public class MainClass {
     watch.addMinute(80); //13:20:00
     watch.see();
     watch.addSecond(3650); //14:20:50
-    
     watch.see();
     
     
@@ -23,6 +22,6 @@ public class MainClass {
     
   }
   
-  //시간 넉넉하게 성공!!!!!!!!!!!!!!!! 기쁘네요....^^
+ 
 
 }

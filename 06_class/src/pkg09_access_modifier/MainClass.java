@@ -21,7 +21,7 @@ public class MainClass {
     System.out.println(computer.getPrice());
     computer.getCalculator().add(4, 5, 6);
     
-    //gh sop 안에 sop 안들어가네 ㅎ ; 그렇구나...
+    //gh sop 안에 sop 못들어가네 ㅎ ; 그렇구나...
     
   
     
