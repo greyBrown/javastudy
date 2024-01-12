@@ -50,8 +50,8 @@ public class Customer {
     
     //구매 결과 처리
     if(breadChange != null) {      //판매 실패시 null이 반환되는것을 사용해 예외처리한다.
-    count += breadChange.getBread();
-    money += breadChange.getChange();
+    this.count += breadChange.getBread();
+    this.money += breadChange.getChange();
     this.money -= money;
   }
     
