@@ -14,8 +14,6 @@ package pkg08_Object;
  *  
  */
 
-import java.util.Objects;
-
 public class Book {
   
   //field
