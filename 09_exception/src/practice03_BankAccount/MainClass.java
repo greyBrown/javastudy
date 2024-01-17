@@ -41,9 +41,13 @@ public class MainClass {
        String message = e.getMessage();
        System.out.println(message);                //예외메세지 확인
        
+      
        BankException cause = (BankException) e.getCause();
+       System.out.println(cause);
        System.out.println(cause.getClass().getName());  //예외클래스이름확인
        System.out.println(cause.getErrorCode());        //에러코드확인
+       
+       
     }     
     
     
