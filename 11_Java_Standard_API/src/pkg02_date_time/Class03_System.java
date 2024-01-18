@@ -1,6 +1,5 @@
 package pkg02_date_time;
 
-import java.io.StringBufferInputStream;
 import java.text.SimpleDateFormat;
 
 public class Class03_System {
