@@ -1,5 +1,6 @@
 package pkg02_OutputStream;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
@@ -10,6 +11,15 @@ public class MainClass {
    * 2. 출력 단위 
    *    1) int             (하나만 내보낼 때 int 를 사용) 
    *    2) byte[]          (여러개를 내보낼 때 byte 배열을 사용)
+   */
+  
+  /*
+   * java.io.BufferedOutputStream
+   * 1. 버퍼링을 지원하는 바이트 출력 스트림이다.
+   * 2. 보조 스트림으로 메인 스트림과 함께 사용해야 한다.
+   * 3. 버퍼링을 지원하므로 출력 속도가 향상된다.
+   * 
+   * + 버퍼를 끼워서 속도가 빠름...필수적으로 써야할 때도 있음.
    */
   
   public static void method1() {
@@ -117,14 +127,127 @@ public class MainClass {
         e2.printStackTrace();
       }
     }
+    //추가모드에서 크기가 계속 쌓임을 알 수있음 32byte 64byte...로그파일들이 이렇게 추가하는 식으로 만들어요. 내용이 계속 추가되니까!
    }
 
-     //추가모드에서 크기가 계속 쌓임을 알 수있음 32byte 64byte...로그파일들이 이렇게 추가하는 식으로 만들어요. 내용이 계속 추가되니까!
+  public static void method3() { //버퍼버전. 이거 단한줄도 안보고 다 작성할 수 있으면...그정도면 오늘목표로 만족스럽다...중요하니까요! 
+    
+     
+    
+    File dir = new File("\\storage");
+    if(!dir.exists()) {
+      dir.mkdirs();
+    }
+    
+    File file = new File(dir, "sample3.dat");
+    
+    //버퍼 출력 스트림 선언
+    BufferedOutputStream out = null;
+    
+    try {
+      //버퍼 출력 스트림 생성(기존 코드에서 이것만 추가되었다고 생각하면 됩니다!) -> 간단하니까 안할이유가 딱히 없음. 그래서 거의 디폴트...
+      out = new BufferedOutputStream(new FileOutputStream(file));
+      
+      String str1 = "finally 처리 안해도 보통 따악히 큰 문제는 없어요.\n";
+      String str2 = "I'm fine thank you";
+      
+      
+      out.write(str1.getBytes());       //위에서는 풀어 썼지만 그냥 이렇게 메서드체이닝처럼 씁니다.
+      out.write(str2.getBytes());
+      
+      out.close();
+      
+      System.out.println(file.length() + "바이트 크기의" + file.getPath() + "파일이 생성되었습니다.");
+      
+    } catch (Exception e) {
+      e.getStackTrace();
+      
+    }
+  }
   
   public static void main(String[] args) {
 
-    method2();
+    practice1();
+    practice2();   // 버퍼를 끼지 않은거에 비해 1/10 정도의 시간만 걸림. 오...빠르네요... 
     
   }
 
+  public static void practice1() {
+    
+    //FileOutputStream으로 애국가 1절 파일로 보내기 : 시간 재기
+   
+    long start = System.nanoTime();
+    
+    File dir = new File("\\storage");
+    if(dir.exists() == false) {
+      dir.mkdirs();}
+   
+    
+    File file = new File(dir, "song1.txt");
+    FileOutputStream out = null;
+    
+    try {
+      
+      out = new FileOutputStream(file);
+      String song = "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 우리 강산 우리 마음으로 길이 보존하세";
+      out.write(song.getBytes());
+      
+      out.close();
+      
+      System.out.println(file.length() + "바이트 크기의" + file.getPath() + "파일이 생성되었습니다.");
+      
+      
+    } catch (Exception e) {
+
+    e.getStackTrace();
+    
+    }
+    
+    long end = System.nanoTime();
+    
+    System.out.println(end - start + "초 걸렸습니다.");
+    
+  }
+  
+  
+  public static void practice2() {
+    
+    //BufferedOutputStream 으로 애국가 1절 파일로 보내기 : 시간 재기
+    
+    long start = System.nanoTime();
+    
+    File dir = new File("\\storage");
+    
+    if(dir.exists() == false) {
+      dir.mkdirs();
+    }
+    
+    File file = new File(dir, "song2.txt");
+    BufferedOutputStream out = null;
+    
+    try {
+      
+      out = new BufferedOutputStream(new FileOutputStream(file));
+      String str1 = "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 우리 강산 우리 마음으로 길이 보존하세";
+      
+      out.write(str1.getBytes());
+      
+      out.close();
+      
+      System.out.println(file.length() + "바이트 크기의" + file.getPath() + "파일이 생성되었습니다.");
+      
+      
+      long end = System.nanoTime();
+      
+      System.out.println(end - start + "초 걸렸습니다.");
+      
+      
+    } catch (Exception e) {
+        e.getStackTrace();
+    }
+    
+    
+  }
+  
+  
 }
