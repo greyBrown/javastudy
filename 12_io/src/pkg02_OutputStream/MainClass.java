@@ -1,8 +1,12 @@
 package pkg02_OutputStream;
 
 import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainClass {
   /*
@@ -20,6 +24,20 @@ public class MainClass {
    * 3. 버퍼링을 지원하므로 출력 속도가 향상된다.
    * 
    * + 버퍼를 끼워서 속도가 빠름...필수적으로 써야할 때도 있음.
+   * 
+   * java.io.DataOutputStream
+   * 1. 자바 변수 값을 출력하는 바이트 출력 스트림이다.
+   * 2. 보조 스트림으로 메인 스트림과 함께 사용해야 한다.
+   * 3. 타입 별로 전용 메소드가 존재한다.
+   * 
+   * java.io.ObjectOutputStream
+   * 1. 객체를 출력하는 바이트 출력 스트림
+   * 2. 보조 스트림으로 메인 스트림과 함께 사용해야 한다.
+   * 3. 객체를 출력 스트림으로 전송하기 위해서는 직렬화 과정이 필요하다. (=객체를 byte[] 로 바꾸는걸 직렬화라고 함)
+   * 4. 직렬화 방법
+   *    1) 직렬화할 클래스는 java.io.Serializable 인터페이스를 구현
+   *    2) long serialVersionUID 필드 값을 임의로 생성한다.
+   *    
    */
   
   public static void method1() {
@@ -165,10 +183,97 @@ public class MainClass {
     }
   }
   
+  public static void method4() {
+    
+    File dir = new File("\\storage");
+    
+    if(!dir.exists()) {
+      dir.mkdirs();
+    }
+    
+    File file = new File(dir, "sample4.dat");
+    
+    // 데이터 출력 스트림 선언
+    DataOutputStream out = null;
+    
+    try {
+      
+      //데이터 출력 스트림 생성
+      out = new DataOutputStream(new FileOutputStream(file));
+      
+      //출력할 데이터(이거 나중에 읽어올때도 같은 순서로 읽어와요. String int 순서이니까 읽을때도 이렇게!)
+      String name = "홍길동";
+      int age = 10;
+      //double height = 140.5;
+      //boolean isAdult = (age >= 20);
+      //char gender = '남';
+      
+      // 출력
+      out.writeUTF(name);
+      //out.write(age);
+      //out.writeDouble(height);
+      //out.writeBoolean(isAdult);
+      //out.writeChar(gender);     //int(4byte)가 남(2byte)보다 커서 자동형변환이 됩니당.
+      
+      out.close();
+      
+      System.out.println(file.length() + "바이트 크기의" + file.getPath() + "파일이 생성되었습니다.");
+      
+      
+    } catch (Exception e) {
+        e.getStackTrace();
+    }
+    
+    
+  }
+  
+  public static void method5() {
+    
+    File dir = new File("\\storage");
+    if(!dir.exists()) {
+      dir.mkdirs();
+    }
+    
+    File file = new File(dir, "sample5.dat");
+    
+    //객체 출력 스트림 선언
+    ObjectOutputStream out = null;
+    
+    try {
+      
+      //객체 출력 스트림 생성
+      out = new ObjectOutputStream(new FileOutputStream(file));
+      
+      //출력할 객체
+      Employee employee = new Employee(1, "홍길동");
+      List<Employee> employees = Arrays.asList(new Employee(2, "홍길순"), new Employee(3, "홍순자"));
+      
+      //객체 출력
+      out.writeObject(employee);
+      out.writeObject(employees);
+      
+      //객체 출력 스트림 닫기
+      out.close();
+      
+      //확인
+      System.out.println(file.length() + "바이트 크기의" + file.getPath() + "파일이 생성되었습니다.");
+      
+      
+    } catch (Exception e) {
+
+          e.printStackTrace();
+    }
+    
+    
+    
+    
+  }
+  
+  
   public static void main(String[] args) {
 
-    practice1();
-    practice2();   // 버퍼를 끼지 않은거에 비해 1/10 정도의 시간만 걸림. 오...빠르네요... 
+    
+    method4();
     
   }
 
