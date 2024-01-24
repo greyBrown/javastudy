@@ -6,8 +6,8 @@ public class MainClass {
 
     
     
-    //MyFileUtils.fileCopy("\\Program Files\\Java\\jdk-17\\LICENSE", "\\storage\\LICENSE"); //복사만 해요! 이동은...다른걸로..이동하면 자바는 어케요 ㅠ
-    MyFileUtils.fileMove("\\storage\\LICENSE", "GDJ77\\LICENSE");
+    MyFileUtils.fileCopy("\\Program Files\\Java\\jdk-17\\LICENSE", "\\storage\\LICENSE"); //복사만 해요! 이동은...다른걸로..이동하면 자바는 어케요 ㅠ
+    //MyFileUtils.fileMove("\\storage\\LICENSE", "GDJ77\\LICENSE");
     
     
      

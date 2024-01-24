@@ -30,10 +30,10 @@ public class MyFileUtils {
     
     try {
       // 원본을 읽는 버퍼 입력 스트림 생성
-      in = new BufferedInputStream(new FileInputStream(srcFile));
+      in = new BufferedInputStream(new FileInputStream(src));
       
       // 복사본을 만드는 버퍼 출력 스트림 생성
-      out = new BufferedOutputStream(new FileOutputStream(destFile));
+      out = new BufferedOutputStream(new FileOutputStream(dest));
       
       // 원본을 5바이트씩 읽어온다.
       byte[] bytes = new byte[5];

@@ -256,8 +256,8 @@ public class MainClass {
       
       //객체 입력
       Employee emp1 = (Employee)in.readObject();  //패키지 다르니까 import 해주기~~ 컨스컨스
-      Employee emp2 = (Employee)in.readObject();  //패키지 다르니까 import 해주기~~ 컨스컨스
-      Employee emp3 = (Employee)in.readObject();  //패키지 다르니까 import 해주기~~ 컨스컨스
+      Employee emp2 = (Employee)in.readObject();  
+      Employee emp3 = (Employee)in.readObject();  
       
       
      System.out.println(emp1.toString());   //이걸 보기 위한 toString 오버라이딩이었죠

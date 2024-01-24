@@ -169,7 +169,7 @@ public class MainClass {
       // 확인
       System.out.println(builder.toString());
       
-      //BufferedReader 닫기
+      // BufferedReader 닫기
       in.close();
       
       
@@ -178,9 +178,6 @@ public class MainClass {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    
-    
-    
   }
  
  
