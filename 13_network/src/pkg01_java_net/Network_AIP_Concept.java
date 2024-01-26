@@ -1,6 +1,6 @@
 package pkg01_java_net;
 
-public class Network_AIP_Comcept {
+public class Network_AIP_Concept {
 
   
   
