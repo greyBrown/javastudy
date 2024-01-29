@@ -20,7 +20,7 @@ public class MainClass {
    */
   
   /*method2
-   * java.sql.Connection Interface
+   * java.sql.Connection
    * 1. 데이터베이스 접속 객체를 생성하는 인터페이스이다.
    * 2. java.sql.DriverManager 클래스가 데이터베이스 접속 객체를 생성한다. (생성을 이 클래스가 한다. 접속은 Connection 인터페이스가. 나눠서 함)
    * 3. 형식
