@@ -120,9 +120,93 @@ public class MainClass {//pkg 01 02 모듈화는 없어요. 기존 코드 계속
     // 설날 전날까지 HTML, css 마무리 목표 설 이후에 자바스크립 시작하는게 목표 내일 jdbc 끝난다고 보면 됩니다.
   }
 
+  public static void method3() {
+    
+    Connection con = null;
+    PreparedStatement ps = null;
+    
+    try {
+      
+      Class.forName("oracle.jdbc.OracleDriver");
+      
+      String url = System.getProperty("jdbc.url");
+      String user = System.getProperty("jdbc.user");
+      String password = System.getProperty("jdbc.password");
+      con = DriverManager.getConnection(url, user, password);
+      
+      String sql = "UPDATE SAMPLE_T SET SAMPLE_EDITOR = SAMPLE_EDITOR || 2, SAMPLE_DT = CURRENT_DATE  WHERE SAMPLE_NO = ?";   /// 오라클 ||연산자! 기존의 컨텐츠 뒤에 2를 붙이겠다. WHERE 절이 없으므로 모든 데이터에 반영됨.
+      ps = con.prepareStatement(sql);
+      // 기존 변경사항 + SAMPLE_DT = CURRENT_DATE 작성으로 수정한 날짜를 추가로 삽입함.
+      
+      // 수정할 SAMPLE_NO 입력
+      Scanner sc = new Scanner(System.in);
+      System.out.println("수정할 SAMPLE_NO 입력하세요 >>>");
+      int sampleNO = sc.nextInt();
+      sc.close();
+      
+      // 입력값을 뭐리문에 전달
+      ps.setInt(1, sampleNO);    //쿼리문의 1번째 물음표에 sampleNo 전달하기
+      
+      int result = ps.executeUpdate();
+      System.out.println(result + "행 이(가) 수정되었습니다.");
+      
+      
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+      try {
+        if (ps != null) ps.close();
+        if(con != null) con.close();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+    
+  }
+  
+ public static void method4() {
+    
+    Connection con = null;
+    PreparedStatement ps = null;
+    
+    try {
+      
+      Class.forName("oracle.jdbc.OracleDriver");
+      
+      String url = System.getProperty("jdbc.url");
+      String user = System.getProperty("jdbc.user");
+      String password = System.getProperty("jdbc.password");
+      con = DriverManager.getConnection(url, user, password);
+      
+      String sql = "DELETE FROM SAMPLE_T WHERE SAMPLE_NO = ?";
+      
+      ps = con.prepareStatement(sql);
+      
+      Scanner sc = new Scanner(System.in);
+      System.out.println("삭제할 SAMPLE_NO 입력하세요 >>>");
+      int sampleNo = sc.nextInt();
+      sc.close();
+      
+      ps.setInt(1, sampleNo);
+      
+      int result = ps.executeUpdate();
+      System.out.println(result + " 행 이(가) 삭제되었습니다.");
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        if(ps != null)  ps.close();
+        if(con != null) con.close();
+      } catch (Exception e2) {
+        e2.printStackTrace();
+      }
+    }
+    
+  }
   public static void main(String[] args) {
 
-    method2();
+    method3();
     
     
   }
