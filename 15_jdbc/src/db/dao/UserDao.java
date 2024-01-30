@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import db.dto.UserDto;
 import pkg03_dql.SampleDto;
@@ -156,17 +157,58 @@ public class UserDao { //이런식으로 모듈화를 합니다! private 을 하
   
   
   // 사용자 수정 : updateUser, modifyUser 등
+  public int modifyUser(UserDto userDto) {   //이름, 연락처, 번호(누가 수정할건지 번호를 알아야함)
+    int result =0;
+   
+    try {
+      connection();
+      String sql = "UPDATE USER_T SET USER_NAME = ?, USER_TEL = ? WHERE USER_NO = ? ";  //문자열 +로 조합할때...띄어쓰기 주의해요 공백하나도 없으면 다 한문장~SELECTNUMBER 이런거...
+      ps = con.prepareStatement(sql);
+      
+      ps.setString(1, userDto.getUser_name());
+      ps.setString(2, userDto.getUser_tel());
+      ps.setInt(3, userDto.getUser_no());
+      
+     result = ps.executeUpdate();
+     System.out.println(result + "행이 수정되었습니다.");
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        close();
+      } catch (Exception e) {
+       e.printStackTrace();
+      }
+    }
+    return result;
+  }
   
-  
+  //성공!!!!!!!! ㅜㅡㅜ  시간내에 성공 ㅜㅜ!!
   
   // 사용자 삭제 : deleteUser, removeUser 등
-  
-  
-  
-  
-  
-
-
+  public int removeUser(int user_no) {
+    int result = 0;
+    try {
+      connection();
+      
+      String sql = "DELETE FROM USER_T  WHERE USER_NO = ? ";
+      ps = con.prepareStatement(sql);
+      ps.setInt(1, user_no);
+      
+      result = ps.executeUpdate();
+      System.out.println(result + "행이 삭제되었습니다.");
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        close();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+    return result;
+  }  //삭제는...그냥 삭제하면 끝이라 비교적 간단했음....
 }
 
 
