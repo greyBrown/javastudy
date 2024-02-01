@@ -144,7 +144,7 @@ public class MainClass {//pkg 01 02 모듈화는 없어요. 기존 코드 계속
       int sampleNO = sc.nextInt();
       sc.close();
       
-      // 입력값을 뭐리문에 전달
+      // 입력값을 쿼리문에 전달
       ps.setInt(1, sampleNO);    //쿼리문의 1번째 물음표에 sampleNo 전달하기
       
       int result = ps.executeUpdate();
